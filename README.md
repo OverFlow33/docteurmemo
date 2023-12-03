@@ -70,15 +70,33 @@ Grafana and Prometheus are integrated into the project for monitoring. The Grafa
 - Username: admin
 - Password: admin
 
-## Notes
+## Configuration
 
-- Make sure to customize the Docker Compose configuration, such as environment variables, depending on your specific project requirements.
-- For detailed information on each Django application, refer to their respective README files located in the `users` and `patient_prediction` directories.
+### Environment Variables
 
-## Contributing
+You can configure Docteurmemo by modifying environment variables in the `.env.db` and `.env` files. You need first to rename the template files `example.env.db` and `example.env` using the command :
 
-If you would like to contribute to DocteurMemo, please follow our [Contribution Guidelines](CONTRIBUTING.md).
+```bash
+   mv example.env.db .env.db 
+   mv example.env .env 
 
-## License
+```
 
-This project is licensed under the [MIT License](LICENSE.md).
+Some of the key environment variables include:
+
+#### .env.prod
+
+- `SECRET_KEY`: Django secret key.
+- `DEBUG`: Set to `True` for development and `False` for production.
+- `DATABASE_URL`: URL for connecting to the PostgreSQL database.
+- `DJANGO_ALLOWED_HOSTS`: Hosts or IP addresses allowed to access the Django application.
+- `CSRF_TRUSTED_ORIGINS`: A list of trusted origins for unsafe requests.
+- `DATABASE`, `DB_ENGINE`, `DB_USERNAME`, `DB_PORT`, `DB_PASS`, `DB_HOST`, and `DB_NAME`: PostgreSQL database configuration.
+
+#### .env.db
+
+- `POSTGRES_USER`: Database username.
+- `POSTGRES_PASSWORD`: Database password.
+- `POSTGRES_DB`: Database name.
+
+Please make sure to update these variables for security and customization in a production environment.
