@@ -9,6 +9,7 @@ from rest_framework import generics
 from datetime import date
 from  .permissions import *
 import requests
+from .utils import *
 
 class UserCreateAPIView(generics.CreateAPIView):
     permission_classes  = [AllowAny,]
@@ -72,8 +73,11 @@ class PredictPatientScoreAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
         name        = request.query_params.get('name')
-        r = requests.get('http://localhost:8001/api/v1/predict/', params={'name': name})
+        url         = 'http://localhost:8001/api/v1/predict/'
+        response    = requests.get(url, params={'name': name})
+        
+        log_prediction_request(request.user, url, 'GET', response)
 
-        if r.status_code == 200:
-            return Response(r.content, status=status.HTTP_200_OK)
+        if response.status_code == 200:
+            return Response(response.content, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)

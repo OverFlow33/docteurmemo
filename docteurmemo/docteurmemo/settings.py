@@ -166,3 +166,32 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'prediction_handler': {
+            'level': 'INFO', 
+            'class': 'logging.FileHandler',
+            'filename': 'predictions.log', 
+            "formatter": "app",
+        },
+    },
+    'loggers': {
+        'prediction_logger': {
+            'handlers': ['prediction_handler'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+    "formatters": {
+        "app": {
+            "format": (
+                u"%(asctime)s [%(levelname)-8s] "
+                "%(message)s"
+            ),
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        },
+    },
+}
