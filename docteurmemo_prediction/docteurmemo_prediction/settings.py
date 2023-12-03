@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 
     'mainapp',
     'database_objects',
+    'django_prometheus',
 ]
 
 MIDDLEWARE = [
